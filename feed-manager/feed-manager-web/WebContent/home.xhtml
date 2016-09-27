@@ -1,0 +1,40 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml"
+	xmlns:a="http://richfaces.org/a4j">
+
+	<ui:define name="body" style="width: 100%; padding: 10px">
+		<h1>Home</h1><br/>
+		<center>
+			<rich:dataGrid value="#{homeBean.allRobots}" var="robot" columns="4" elements="8">
+			    <rich:panel bodyClass="pbody" width="25%">
+			        <f:facet name="header">
+			            <h:outputText value="#{robot.name}" />
+			        </f:facet>
+			        <h:panelGrid columns="2">
+			            <h:outputText value="Shows encontrados:" styleClass="label" />
+			            <h:outputText value="#{homeBean.totalNormalizadoMap.get(robot)}" />
+			            <h:outputText value="Links não processados:" styleClass="label" />
+			            <h:outputText value="#{homeBean.totalNaoNormalizadoMap.get(robot)}" />
+			            <h:outputText value="Shows aceitos:" styleClass="label" />
+			            <h:outputText value="#{homeBean.totalAceitoMap.get(robot)}" />
+			            <h:outputText value="Shows rejeitados:" styleClass="label" />
+			            <h:outputText value="#{homeBean.totalNaoAceitoMap.get(robot)}" />
+			            <h:outputText value="Última captação:" styleClass="label" />
+			            <h:outputText value="#{homeBean.dataFormatada(homeBean.totalUltimaCaptacaoMap.get(robot))}" />
+			            <h:outputText value="Última normalização:" styleClass="label" />
+			            <h:outputText value="#{homeBean.dataFormatada(homeBean.totalUltimaNormalizacaoMap.get(robot))}" />
+			        </h:panelGrid>
+			    </rich:panel>
+			    <f:facet name="footer">
+			        <rich:dataScroller fastStep="1"/>
+			    </f:facet>
+			</rich:dataGrid>
+		</center>
+	</ui:define>
+</ui:composition>

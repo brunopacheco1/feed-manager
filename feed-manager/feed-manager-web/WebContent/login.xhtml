@@ -1,0 +1,44 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+<br/>
+<br/>
+<br/>
+<br/>
+    <div id = "centro" style=" width : 434px;">
+<!--     <a:region> -->
+    <h:form id="loginForm">
+	
+        <rich:panel styleClass="efeitoShadow bgAcizentado" style=" width : 420px;">
+           <h:outputLabel value=" Bem-vindo SCD!" styleClass="labelTitulo" />
+ 
+            <div class="dialog" style=" width : 346px;">
+                <h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
+                    <h:outputLabel style="font-size:16px;color: #333;" for="username" >Usuário:</h:outputLabel>
+                    <h:inputText id="username"  value="#{credentials.username}" style=" width : 138px;"/>
+                    <h:outputLabel style="font-size:16px; color: #333" for="password">Senha:</h:outputLabel>
+                    <h:inputSecret id="password" value="#{credentials.password}" style=" width : 138px;"/>
+                    <div class="actionButtons" align="right" style=" width : 266px;">
+                         <h:commandButton styleClass="btnEntrar" id="submit" value="Entrar" action="#{identity.login}"
+                         onclick="Richfaces.showModalPanel('IdmodalLoading')"/>
+                    </div>
+                </h:panelGrid>
+            </div>
+        </rich:panel>
+    </h:form>
+<!-- 	<a:form> -->
+<!-- 		<a:jsFunction name="foco" focus="username" reRender="loginForm"></a:jsFunction> -->
+<!-- 	</a:form> -->
+<!-- 	</a:region> -->
+  </div>
+
+ </ui:define>
+</ui:composition>

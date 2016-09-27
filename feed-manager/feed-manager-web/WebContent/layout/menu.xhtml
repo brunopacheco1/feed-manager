@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://richfaces.org/a4j"
+		xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<s:div rendered="#{!info.acesso}">	
+		<div id="FdHeader">
+			<div id="logo"></div>
+
+		
+			<div id="logout">
+				<table>
+					<tr>
+						<td><h:outputText styleClass="titulo" value="Sistema de Captação Digital"/><H1 style=" margin-right: 320px;"></H1></td>
+						<td><s:link id="menuLogoutId" view="/home.xhtml"
+					action="#{identity.logout()}" value="Sair"
+					rendered="#{identity.loggedIn}" propagation="none"
+					styleClass="btn_sair_user"></s:link></td>
+					</tr>
+				</table>
+			</div>
+			<div id="menu">
+
+				<h:form>
+					<rich:toolbar styleClass="menu_sga">
+
+						<rich:dropDownMenu mode="ajax">
+													
+						
+						
+						
+						</rich:dropDownMenu>
+
+
+
+						<rich:menuItem  label="Home" value="Home" action="/home.xhtml"  rendered="#{identity.loggedIn}" >
+								<f:facet name="icon">
+				                    <h:graphicImage value="/img/menu/home_sga.png" alt="home" />
+				                </f:facet>
+								<s:link id="home" view="/home.xhtml" />
+							</rich:menuItem>
+							
+							<rich:menuItem label="Robô" value="Robô" action="/robo.xhtml" rendered="#{identity.loggedIn}">
+								<s:link  id="robo" propagation="end" view="/robo.xhtml" />
+								<s:conversationPropagation type="end"></s:conversationPropagation>
+							</rich:menuItem>
+							
+							<rich:menuItem label="Show" value="Show" action="/show.xhtml" rendered="#{identity.loggedIn}">
+								<s:link id="show" view="/show.xhtml" />
+							</rich:menuItem>
+						
+					</rich:toolbar>
+				</h:form>
+			</div>
+		</div>
+	</s:div>
+</ui:composition>

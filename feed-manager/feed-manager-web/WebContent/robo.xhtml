@@ -1,0 +1,100 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+   	xmlns:s="http://jboss.org/schema/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a="http://richfaces.org/a4j"
+    template="layout/template.xhtml">
+
+    <ui:define name="body">
+	<h:form>
+        <h1 style="margin-bottom: 10px;">Robô</h1>
+        <rich:panel styleClass="corner_03 rich-panel">
+        <s:div style="margin-bottom: 10px;" styleClass="header_box_sga ico_buscar">
+						<h:outputText value="informações" />
+				</s:div>
+			<h:outputText value="#{robot.selected}" />
+				<rich:dataTable  id="robos" value="#{roboBean.robots}" var="robot" width="100%" styleClass="tabelaZebrada">
+					<rich:column style="text-align:center;">
+						<f:facet name="header">
+						<h:outputText value="Seleção" />
+						</f:facet>
+
+						<h:selectBooleanCheckbox value="#{robot.selected}"/>
+
+					</rich:column>
+					
+					<rich:column >
+					<f:facet name="header">
+						<h:outputText value="Nome" />
+					</f:facet>
+						<h:outputText  value="#{robot.name}" />
+					</rich:column>
+					
+					<rich:column >
+					<f:facet name="header">
+						<h:outputText value="Endereço" />
+					</f:facet>
+					<h:outputText value="#{robot.url}" />
+					</rich:column>
+					
+					<rich:column >
+					<f:facet name="header">
+						<h:outputText value="Regex de Docs" />
+					</f:facet>
+					<h:outputText value="#{robot.documentURLRegex}" />
+					</rich:column>
+					
+					<rich:column >
+					<f:facet name="header">
+						<h:outputText value="Grupo" />
+					</f:facet>
+					<h:outputText value="#{robot.robotGroup.name}" />
+					</rich:column>
+					
+					<rich:column >
+					<f:facet name="header">
+						<h:outputText value="Fonte" />
+					</f:facet>
+					<h:outputText value="#{robot.source.name}" />
+					</rich:column>
+					
+					<rich:column id="#{robot.id}_coluna">
+						<f:facet name="header">
+							<h:outputText value="Ações" />
+						</f:facet>
+						<h:outputText value="#{roboBean.getStatus(robot)}" />
+							<a:poll interval="1000" render="#{robot.id}" />
+					</rich:column>
+					
+				</rich:dataTable>
+        </rich:panel>
+        
+        
+         <div  class="aba_esquerda_baixo" style="width: 270px;">
+			
+				<h:commandButton action="#{roboBean.executarRobo()}" type="submit"
+					styleClass="ico_aceitar" value="Executar" reRender="tableShows"
+					onclick="Richfaces.showModalPanel('IdmodalLoading')" />
+					
+					<h:commandButton action="#{roboBean.limparCaptacao()}" type="submit"
+					styleClass="ico_rejeitar" value="Remover Captação" reRender="tableShows"
+					onclick="Richfaces.showModalPanel('IdmodalLoading')" />
+					
+				<div class="posicao_acabamento" />
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+		</h:form>
+
+	</ui:define>
+</ui:composition>

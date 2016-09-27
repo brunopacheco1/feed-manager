@@ -1,0 +1,17 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.dev.bruno</groupId>
+	<artifactId>feed-manager</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<name>feed-manager - Parent POM</name>
+	<description>POM parent do projeto pai dos modulos do feed-manager.</description>
+	<modules>
+		<module>feed-manager-web</module>
+		<module>feed-model</module>
+	</modules>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+</project>

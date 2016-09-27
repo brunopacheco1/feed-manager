@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich" contentType="text/html">
+	<h:html>
+<h:head>
+
+
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0
+}
+
+#centro {
+	width: 740px; /* esse elemento é que vai fazer a técnica */
+	margin: 0 auto;
+	position: relative;
+	min-height: 100%;
+	background: white;
+	/* É aqui que temos o background do conteudo na verdade */
+	z-index: 2;
+}
+
+#bottom {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 82px;
+}
+</style>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>SCD</title>
+<link rel="shortcut icon" href="#{request.contextPath}/favicon.ico" />
+
+
+<link href="stylesheet/theme.css" rel="stylesheet" type="text/css"/>
+<link href="stylesheet/theme.ecss"   rel="stylesheet" type="text/css" />
+<link href="stylesheet/estilo.css" rel="stylesheet" type="text/css"/>
+
+<ui:insert name="head" />
+
+
+</h:head>
+<h:body>
+   <rich:notifyMessages stayTime="5000" nonblocking="true" />
+	
+	<div id="Container">
+		<ui:include src="menu.xhtml">
+			<ui:param name="projectName" value="ManagerView" />
+		</ui:include>
+		
+
+		<div class="body">
+
+			<s:div id="templatebody">
+
+				<ui:insert name="body" />
+			</s:div>
+		</div>
+	</div>
+	<s:div styleClass="warp_footer" >
+		<h:outputText styleClass="" value="Desenvolvido por Bruno Pacheco" />
+	</s:div>
+	
+</h:body>
+	</h:html>
+</f:view>

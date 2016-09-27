@@ -1,0 +1,324 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j" template="layout/template.xhtml">
+
+
+	<ui:define name="body">
+
+		<h:form>
+			<h1 style="margin-bottom: 10px;">Pré - Show</h1>
+
+			<rich:panel styleClass="corner_03 rich-panel">
+				<s:div style="margin-bottom: 10px;"
+					styleClass="header_box_sga ico_buscar">
+					<h:outputText value="Filtros" />
+				</s:div>
+
+				<h:panelGrid columns="4" cellspacing="6" width="100%"
+					columnClasses="coluna_20porcento alinhamentoTextoRight bold label_nome,coluna_30porcento filtro alinhamentoTextoLeft,coluna_15porcento alinhamentoTextoRight bold label_nome,coluna_35porcento filtro alinhamentoTextoLeft">
+
+					<h:column>
+						<h:outputText value="Nome: " />
+					</h:column>
+					<h:column>
+						<h:inputText title="Nome" value="#{showBean.nomeShow}" />
+					</h:column>
+
+					<h:column>
+						<h:outputText value="Local: " />
+					</h:column>
+					<h:column>
+						<h:inputText title="local do show" value="#{showBean.localShow}" />
+					</h:column>
+				</h:panelGrid>
+				
+				<h:panelGrid columns="4" cellspacing="6" width="100%" class="bgAcizentado corner_all"
+					columnClasses="coluna_20porcento alinhamentoTextoRight bold label_nome,coluna_30porcento filtro alinhamentoTextoLeft,coluna_15porcento alinhamentoTextoRight bold label_nome,coluna_35porcento filtro alinhamentoTextoLeft">
+
+					<h:column>
+						<h:outputText value="Data de Realização Inicial: " />
+					</h:column>
+
+					<h:column>
+						<rich:calendar id="dataInicial" 
+							value="#{showBean.datTelaRealizacaoInicial}"
+							datePattern="dd/MM/yyyy" mode="ajax" firstWeekDay="0"
+							showWeeksBar="false" locale="#{locale.toString()}" inputSize="12"
+							immediate="true" styleClass="formatar_data_filtro" />
+					</h:column>
+
+					<h:column>
+						<h:outputText value="Data de Realização Final: " />
+					</h:column>
+
+					<h:column>
+						<rich:calendar id="datafinal"
+							value="#{showBean.datTelaRealizacaoFinal}"
+							datePattern="dd/MM/yyyy" mode="ajax" firstWeekDay="0"
+							showWeeksBar="false" locale="#{locale.toString()}"
+							immediate="true" styleClass="formatar_data_filtro" />
+					</h:column>
+
+
+				</h:panelGrid>
+
+			</rich:panel>
+
+			<div class="aba_esquerda_baixo" style="width: 220px;">
+
+				<h:commandButton action="#{showBean.pesquisarShow()}" type="submit"
+					styleClass="ico_pesquisa" value="Pesquisar" reRender="tableShows"
+					onclick="Richfaces.showModalPanel('IdmodalLoading')" />
+
+				<h:commandButton action="#{showBean.limparCamposTela()}"
+					type="submit" styleClass="ico_rejeitar" value="Limpar"
+					reRender="tableShows"
+					onclick="Richfaces.showModalPanel('IdmodalLoading')" />
+
+				<div class="posicao_acabamento" />
+			</div>
+
+
+			<rich:panel styleClass="corner_03 rich-panel"
+				rendered="#{not empty showBean.showHolders}">
+				<s:div style="margin-bottom: 10px;"
+					styleClass="header_box_sga ico_buscar">
+					<h:outputText value="informações" />
+				</s:div>
+
+
+				<rich:dataTable style="width: 100%;" id="tableShows"
+					value="#{showBean.showHolders}" rows="20" rowKeyVar="t" var="show"
+					width="100%" styleClass="tabelaZebrada">
+
+
+					<f:facet name="header">
+
+						<rich:columnGroup>
+
+
+							<rich:column breakRowBefore="true" style="text-align:center;" styleClass="coluna_verde_destaque">
+								<h:outputText value="Aceitar" />
+							</rich:column>
+							
+							<rich:column style="text-align:center;" styleClass="coluna_vermelha_destaque">
+								<h:outputText value="Rejeitar" />
+							</rich:column>
+
+							<rich:column>
+								<h:outputText value="Nome" />
+							</rich:column>
+
+							<rich:column>
+								<h:outputText value="Local" />
+							</rich:column>
+
+							<rich:column>
+								<h:outputText value="Realização" />
+							</rich:column>
+
+							<rich:column style="text-align:center;">
+								<h:outputText value="Fontes" />
+							</rich:column>
+
+							<rich:column style="text-align:center;">
+								<h:outputText value="Informações" />
+							</rich:column>
+						</rich:columnGroup>
+					</f:facet>
+
+					<rich:column styleClass="header_box_show" colspan="7">
+						<rich:collapsibleSubTableToggler for="sbtbl" />
+						<h:outputText styleClass="header_box_show" value="#{show.nome}" />
+					</rich:column>
+
+					<rich:collapsibleSubTable value="#{show.shows}" var="subShow"
+						rowKeyVar="c" id="sbtbl" expandMode="client" rows="8">
+
+						<rich:column styleClass="coluna_verde_destaque">
+							<h:selectBooleanCheckbox value="#{subShow.accepted}">
+								<a:ajax listener="#{showBean.aceitarShow(subShow)}" render="tableShows" />
+							</h:selectBooleanCheckbox>
+						</rich:column>
+						
+						<rich:column styleClass="coluna_vermelha_destaque">
+							<h:selectBooleanCheckbox value="#{subShow.rejected}" >
+								<a:ajax listener="#{showBean.rejeitarShow(subShow)}" render="tableShows" />
+							</h:selectBooleanCheckbox>
+						</rich:column>
+
+						<rich:column styleClass="coluna_35porcento" >
+							<h:outputText value="#{subShow.nome}" />
+						</rich:column>
+
+						<rich:column styleClass="coluna_20porcento" >
+							<h:outputText value="#{subShow.localStr}" />
+						</rich:column>
+
+						<rich:column styleClass="coluna_realizacao">
+							<h:outputText value="#{subShow.realizacao}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+									timeZone="GMT-03:00" />
+							</h:outputText>
+						</rich:column>
+
+						<rich:column>
+							<a href="#{subShow.document.url.url}" target="_blank">#{subShow.document.url.robot.source.name}</a>
+						</rich:column>
+
+						<rich:column>
+							<h:commandButton styleClass="ico_estrato_1" value="Informações"
+								title="Informações do show"
+								actionListener="#{showBean.setIndexInformation(t)}"
+								action="#{showBean.setIndexInformation(t)}">
+								<rich:componentControl target="popup" operation="show" />
+							</h:commandButton>
+
+							<rich:popupPanel id="popup" modal="true" autosized="true"
+								rendered="#{not empty showBean.showHolders}" onshow="true"
+								styleClass="corner_all rich-panel" style="padding: 5px;">
+								<f:facet name="header">
+									<h:outputText value="Informações" />
+								</f:facet>
+								<f:facet name="controls">
+
+									<a:commandButton style="text-align:center;" id="btnClose"
+										image="/img/fechar.png"
+										onclick="#{rich:component('popup')}.hide(); return false;"
+										reRender="templatebody">
+									</a:commandButton>
+								</f:facet>
+
+								<h:panelGrid columns="2" styleClass="semborda" width="100%"
+									style="padding:10px;">
+
+									<h:column>
+										<h:outputText styleClass="colorLightGray" value="Nome: " />
+										<h:outputText
+											styleClass="fontBold fontSizeDoze colorIndigoBlue"
+											value="#{showBean.showHolders.get(t).shows.get(c).nome}" />
+									</h:column>
+
+									<h:column>
+										<h:outputText styleClass="colorLightGray"
+											value="Data de Realização: " />
+										<h:outputText
+											styleClass="fontBold fontSizeDoze colorIndigoBlue"
+											value="#{showBean.showHolders.get(t).shows.get(c).realizacao}">
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+												timeZone="GMT-03:00" />
+										</h:outputText>
+									</h:column>
+
+
+									<h:column>
+										<h:outputText styleClass="colorLightGray" value="Local: " />
+										<h:outputText
+											styleClass="fontBold fontSizeDoze colorIndigoBlue"
+											value="#{showBean.showHolders.get(t).shows.get(c).localStr}" />
+									</h:column>
+
+									<h:column>
+										<h:outputText styleClass="colorLightGray"
+											value="Data de Normalização: " />
+										<h:outputText
+											styleClass="fontBold fontSizeDoze colorIndigoBlue"
+											value=" #{showBean.showHolders.get(t).shows.get(c).document.normalizationDate}" >
+												<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-03:00" />
+											</h:outputText>
+									</h:column>
+
+								</h:panelGrid>
+
+								<div class="corner_all"
+									style="background-color: #e9e9e9; border-radius: 5px !important; padding: 5px 10px;">
+									<h:outputText
+										styleClass="fontBold fontSizeTreze colorIndigoBlue"
+										value="Fonte" />
+								</div>
+
+								<h:panelGrid columns="2" styleClass="semborda" width="100%"
+									style="padding:5px;">
+
+									<h:column>
+										<h:outputText styleClass="colorLightGray" value="Nome: " />
+										<h:outputText
+											styleClass="fontBold fontSizeDoze colorIndigoBlue"
+											value="#{showBean.showHolders.get(t).shows.get(c).document.url.robot.name}" />
+									</h:column>
+
+									<h:column>
+										<h:outputText styleClass="colorLightGray" value="URL: " />
+										<h:outputText styleClass="fontBold fontSizeDoze colorIndigoBlue" value="#{showBean.showHolders.get(t).shows.get(c).document.url.url}" />
+									</h:column>
+
+									<h:column>
+										<h:outputText styleClass="colorLightGray"
+											value="Data de Captura: " />
+										<h:outputText
+											styleClass="fontBold fontSizeDoze colorIndigoBlue"
+											value="#{showBean.showHolders.get(t).shows.get(c).document.url.captureDate} ">
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+												timeZone="GMT-03:00" />
+
+										</h:outputText>
+									</h:column>
+
+									<h:column>
+										<h:outputText styleClass="colorLightGray" value="Robô: " />
+										<h:outputText
+											styleClass="fontBold fontSizeDoze colorIndigoBlue"
+											value="#{showBean.showHolders.get(t).shows.get(c).document.url.robot.name}" />
+									</h:column>
+
+									<h:column>
+										<h:outputText styleClass="colorLightGray"
+											value="CRON de Execução: " />
+										<h:outputText
+											styleClass="fontBold fontSizeDoze colorIndigoBlue"
+											value="#{showBean.showHolders.get(t).shows.get(c).document.url.robot.robotGroup.cronPattern}" />
+									</h:column>
+
+								</h:panelGrid>
+
+							</rich:popupPanel>
+
+						</rich:column>
+
+					</rich:collapsibleSubTable>
+
+				</rich:dataTable>
+
+
+				<br />
+				<rich:dataScroller  style="margin-left:250px;" for="tableShows" maxPages="5" fastStep="2" />
+
+
+			</rich:panel>
+
+
+			<s:div rendered="#{not empty showBean.showHolders}">
+
+				<div class="aba_esquerda_baixo" style="width: 200px;">
+
+					<a:commandButton style="text-align:center;"
+						title="Confirmar"
+						action="#{showBean.confirmarAcao()}" styleClass="ico_aceitar"
+						value="Confirmar" reRender="tableShows"
+						onclick="Richfaces.showModalPanel('IdmodalLoading')" />
+
+					<div class="posicao_acabamento" />
+				</div>
+			</s:div>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
