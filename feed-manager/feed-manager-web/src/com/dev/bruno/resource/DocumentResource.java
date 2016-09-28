@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -17,13 +17,12 @@ import javax.ws.rs.core.Response.Status;
 import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.model.Show;
 import com.dev.bruno.queue.service.ShowQueueService;
-import com.dev.bruno.resource.AbstractResource;
 
 @Stateless
 @Path("document")
 public class DocumentResource extends AbstractResource {
 
-	@EJB
+	@Inject
 	private ShowQueueService showQueueService;
 	
 	@PUT

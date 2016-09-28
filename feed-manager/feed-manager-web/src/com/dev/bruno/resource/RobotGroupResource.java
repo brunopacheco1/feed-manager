@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -23,14 +23,13 @@ import org.quartz.SchedulerException;
 
 import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.model.RobotGroup;
-import com.dev.bruno.resource.AbstractResource;
 import com.dev.bruno.service.RobotGroupService;
 
 @Stateless
 @Path("robot-group")
 public class RobotGroupResource extends AbstractResource {
 
-	@EJB
+	@Inject
 	private RobotGroupService groupService;
 	
 	@POST

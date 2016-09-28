@@ -1,19 +1,18 @@
 package com.dev.bruno.service;
 
-import javax.ejb.EJB;
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 
 import com.dev.bruno.dao.LocalDAO;
 import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.model.Local;
 import com.dev.bruno.model.LocalSimilar;
-import com.dev.bruno.service.AbstractService;
 import com.dev.bruno.utils.SimilarityUtils;
 
 @Singleton
 public class LocalService extends AbstractService {
 
-	@EJB
+	@Inject
 	private LocalDAO localDAO;
 	
 	public Local add(String nome) throws GenericException {

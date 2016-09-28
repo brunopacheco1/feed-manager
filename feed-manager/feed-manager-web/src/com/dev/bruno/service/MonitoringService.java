@@ -2,20 +2,19 @@ package com.dev.bruno.service;
 
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 
 import com.dev.bruno.dao.MonitoringDAO;
 import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.exception.MandatoryFieldsException;
 import com.dev.bruno.model.Monitoring;
-import com.dev.bruno.service.AbstractService;
 
 @Stateless
 public class MonitoringService extends AbstractService {
 
-	@EJB
+	@Inject
 	private MonitoringDAO monitoringDAO;
 	
 	

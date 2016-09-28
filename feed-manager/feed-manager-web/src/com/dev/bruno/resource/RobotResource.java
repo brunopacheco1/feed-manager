@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -21,7 +21,6 @@ import javax.ws.rs.core.Response.Status;
 
 import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.model.Robot;
-import com.dev.bruno.resource.AbstractResource;
 import com.dev.bruno.service.CrawlingService;
 import com.dev.bruno.service.RobotService;
 
@@ -29,10 +28,10 @@ import com.dev.bruno.service.RobotService;
 @Path("robot")
 public class RobotResource extends AbstractResource {
 
-	@EJB
+	@Inject
 	private RobotService robotService;
 	
-	@EJB
+	@Inject
 	private CrawlingService crawlingService;
 
 	@POST

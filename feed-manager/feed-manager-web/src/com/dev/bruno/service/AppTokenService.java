@@ -3,8 +3,8 @@ package com.dev.bruno.service;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import org.joda.time.DateTime;
 
@@ -16,18 +16,17 @@ import com.dev.bruno.exception.MandatoryFieldsException;
 import com.dev.bruno.model.AppToken;
 import com.dev.bruno.model.AppUser;
 import com.dev.bruno.model.Robot;
-import com.dev.bruno.service.AbstractService;
 
 @Stateless
 public class AppTokenService extends AbstractService {
 
-	@EJB
+	@Inject
 	private AppTokenDAO tokenDAO;
 	
-	@EJB
+	@Inject
 	private AppUserService userService;
 	
-	@EJB
+	@Inject
 	private RobotService robotService;
 
 	public AppToken generateToken(AppUser user) throws GenericException {

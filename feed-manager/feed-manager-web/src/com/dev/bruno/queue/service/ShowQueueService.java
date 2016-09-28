@@ -6,8 +6,8 @@ import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
@@ -24,7 +24,6 @@ import com.dev.bruno.exception.NothingToDoException;
 import com.dev.bruno.model.Show;
 import com.dev.bruno.service.AbstractService;
 import com.dev.bruno.service.NormalizationService;
-import com.dev.bruno.service.RobotService;
 
 @Singleton
 public class ShowQueueService extends AbstractService {
@@ -36,13 +35,10 @@ public class ShowQueueService extends AbstractService {
 	@Resource(name="showQueue")
 	private String showQueue;
 	
-	@EJB
+	@Inject
 	private ShowQueueController queueController;
 	
-	@EJB
-	private RobotService robotService;
-	
-	@EJB
+	@Inject
 	private NormalizationService normalizationService;
 	
 	private Connection connection;

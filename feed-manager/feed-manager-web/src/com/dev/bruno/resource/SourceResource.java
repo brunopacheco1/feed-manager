@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -21,14 +21,13 @@ import javax.ws.rs.core.Response.Status;
 
 import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.model.Source;
-import com.dev.bruno.resource.AbstractResource;
 import com.dev.bruno.service.SourceService;
 
 @Stateless
 @Path("source")
 public class SourceResource extends AbstractResource {
 
-	@EJB
+	@Inject
 	private SourceService sourceService;
 	
 	@POST

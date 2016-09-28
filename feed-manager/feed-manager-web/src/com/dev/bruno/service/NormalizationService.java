@@ -4,15 +4,14 @@ import java.util.List;
 import java.util.logging.Level;
 
 import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 
 import com.dev.bruno.dto.NormalizerDTO;
-
 import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.exception.NothingToDoException;
 import com.dev.bruno.exception.RobotAccessException;
@@ -20,18 +19,17 @@ import com.dev.bruno.model.AppToken;
 import com.dev.bruno.model.DocumentURL;
 import com.dev.bruno.model.Robot;
 import com.dev.bruno.response.ExecutionResponse;
-import com.dev.bruno.service.AbstractService;
 
 @Stateless
 public class NormalizationService extends AbstractService {
 	
-	@EJB
+	@Inject
 	private RobotService robotSerice;
 	
-	@EJB
+	@Inject
 	private DocumentURLService urlService;
 	
-	@EJB
+	@Inject
 	private AppTokenService tokenService;
 	
 	@Resource(name="api.address")

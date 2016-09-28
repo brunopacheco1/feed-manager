@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,7 +17,6 @@ import javax.ws.rs.core.Response.Status;
 import org.quartz.SchedulerException;
 
 import com.dev.bruno.exception.GenericException;
-import com.dev.bruno.resource.AbstractResource;
 import com.dev.bruno.response.GenericResponse;
 import com.dev.bruno.service.SchedulerService;
 import com.dev.bruno.service.SimilarityService;
@@ -26,10 +25,10 @@ import com.dev.bruno.service.SimilarityService;
 @Path("similarity")
 public class SimilarityResource extends AbstractResource {
 
-	@EJB
+	@Inject
 	private SimilarityService similarityService;
 	
-	@EJB
+	@Inject
 	private SchedulerService schedulerService;
 	
 	@GET

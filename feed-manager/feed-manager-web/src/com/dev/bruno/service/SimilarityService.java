@@ -5,24 +5,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import com.dev.bruno.dao.LocalDAO;
 import com.dev.bruno.dao.ShowDAO;
 import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.model.Local;
 import com.dev.bruno.model.LocalSimilar;
-import com.dev.bruno.service.AbstractService;
 import com.dev.bruno.utils.SimilarityUtils;
 
 @Stateless
 public class SimilarityService extends AbstractService {
 
-	@EJB
+	@Inject
 	private LocalDAO localDAO;
 	
-	@EJB
+	@Inject
 	private ShowDAO showDAO;
 	
 	public List<String> checkSimilarity(Double percentage) throws GenericException {

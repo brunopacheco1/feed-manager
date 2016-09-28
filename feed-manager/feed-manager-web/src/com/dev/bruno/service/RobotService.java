@@ -4,13 +4,12 @@ import java.util.List;
 import java.util.logging.Level;
 
 import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
 import com.dev.bruno.dao.RobotDAO;
-import com.dev.bruno.dao.SourceURLDAO;
 import com.dev.bruno.exception.EntityExistsException;
 import com.dev.bruno.exception.EntityNotFoundException;
 import com.dev.bruno.exception.GenericException;
@@ -19,37 +18,22 @@ import com.dev.bruno.exception.RobotAccessException;
 import com.dev.bruno.model.Robot;
 import com.dev.bruno.model.RobotGroup;
 import com.dev.bruno.model.Source;
-import com.dev.bruno.queue.service.DocumentURLQueueService;
-import com.dev.bruno.queue.service.ShowQueueService;
 import com.dev.bruno.response.ExecutionResponse;
-import com.dev.bruno.service.AbstractService;
 
 @Stateless
 public class RobotService extends AbstractService {
 
-	@EJB
+	@Inject
 	private RobotDAO robotDAO;
 	
-	@EJB
-	private SourceURLDAO sourceURLDAO;
-	
-	@EJB
+	@Inject
 	private RobotGroupService groupService;
 	
-	@EJB
+	@Inject
 	private SourceService sourceService;
 	
-	@EJB
-	private DocumentURLQueueService urlsService;
-	
-	@EJB
-	private ShowQueueService normalizedDocumentsService;
-	
-	@EJB
+	@Inject
 	private ShowService showService;
-	
-	@EJB
-	private AppTokenService tokenService;
 	
 	@Resource(name="api.address")
 	private String apiAddress;

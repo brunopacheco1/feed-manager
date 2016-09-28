@@ -3,8 +3,8 @@ package com.dev.bruno.service;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 
 import com.dev.bruno.dao.DocumentDAO;
@@ -17,22 +17,21 @@ import com.dev.bruno.model.DocumentURL;
 import com.dev.bruno.model.Local;
 import com.dev.bruno.model.Robot;
 import com.dev.bruno.model.Show;
-import com.dev.bruno.service.AbstractService;
 import com.dev.bruno.utils.HashUtils;
 
 @Stateless
 public class ShowService extends AbstractService {
 
-	@EJB
+	@Inject
 	private ShowDAO showDAO;
 	
-	@EJB
+	@Inject
 	private DocumentDAO documentDAO;
 	
-	@EJB
+	@Inject
 	private DocumentURLDAO documentURLDAO;
 	
-	@EJB
+	@Inject
 	private LocalService localService;
 	
 	public Boolean exists(Long id) throws GenericException {

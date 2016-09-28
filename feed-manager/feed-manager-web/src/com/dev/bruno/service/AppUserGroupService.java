@@ -2,8 +2,8 @@ package com.dev.bruno.service;
 
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import com.dev.bruno.dao.AppUserGroupDAO;
 import com.dev.bruno.exception.EntityExistsException;
@@ -11,12 +11,11 @@ import com.dev.bruno.exception.EntityNotFoundException;
 import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.exception.MandatoryFieldsException;
 import com.dev.bruno.model.AppUserGroup;
-import com.dev.bruno.service.AbstractService;
 
 @Stateless
 public class AppUserGroupService extends AbstractService {
 
-	@EJB
+	@Inject
 	private AppUserGroupDAO groupDAO;
 	
 	

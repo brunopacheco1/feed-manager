@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import org.quartz.CronExpression;
 import org.quartz.SchedulerException;
@@ -19,24 +19,23 @@ import com.dev.bruno.exception.MandatoryFieldsException;
 import com.dev.bruno.model.Robot;
 import com.dev.bruno.model.RobotGroup;
 import com.dev.bruno.response.ExecutionResponse;
-import com.dev.bruno.service.AbstractService;
 
 @Stateless
 public class RobotGroupService extends AbstractService {
 
-	@EJB
+	@Inject
 	private RobotGroupDAO groupDAO;
 	
-	@EJB
+	@Inject
 	private RobotService robotService;
 	
-	@EJB
+	@Inject
 	private CrawlingService crawlingService;
 	
-	@EJB
+	@Inject
 	private NormalizationService normalizationService;
 	
-	@EJB
+	@Inject
 	private SchedulerService schedulerService;
 	
 	public RobotGroup add(RobotGroup group) throws GenericException, SchedulerException {

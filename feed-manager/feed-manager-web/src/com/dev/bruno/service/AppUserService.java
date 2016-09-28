@@ -5,8 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.logging.Level;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import com.dev.bruno.dao.AppUserDAO;
 import com.dev.bruno.exception.EntityExistsException;
@@ -17,18 +17,17 @@ import com.dev.bruno.exception.MandatoryFieldsException;
 import com.dev.bruno.model.AppToken;
 import com.dev.bruno.model.AppUser;
 import com.dev.bruno.model.AppUserGroup;
-import com.dev.bruno.service.AbstractService;
 
 @Stateless
 public class AppUserService extends AbstractService {
 
-	@EJB
+	@Inject
 	private AppUserDAO userDAO;
 	
-	@EJB
+	@Inject
 	private AppUserGroupService groupService;
 
-	@EJB
+	@Inject
 	private AppTokenService tokenService;
 
 	public AppUser add(AppUser user) throws GenericException {

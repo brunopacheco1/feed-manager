@@ -3,32 +3,27 @@ package com.dev.bruno.service;
 import java.util.logging.Level;
 
 import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 
 import com.dev.bruno.dto.CrawlerDTO;
-
 import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.exception.RobotAccessException;
 import com.dev.bruno.model.AppToken;
 import com.dev.bruno.model.Robot;
 import com.dev.bruno.response.ExecutionResponse;
-import com.dev.bruno.service.AbstractService;
 
 @Stateless
 public class CrawlingService extends AbstractService {
 	
-	@EJB
+	@Inject
 	private RobotService robotSerice;
 	
-	@EJB
-	private DocumentURLService urlService;
-	
-	@EJB
+	@Inject
 	private AppTokenService tokenService;
 	
 	@Resource(name="api.address")

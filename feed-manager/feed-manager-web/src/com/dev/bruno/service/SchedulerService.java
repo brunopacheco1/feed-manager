@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.CronScheduleBuilder;
@@ -22,7 +22,6 @@ import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.job.DocumentKeyReviser;
 import com.dev.bruno.job.RobotRunner;
 import com.dev.bruno.model.RobotGroup;
-import com.dev.bruno.service.AbstractService;
 
 @Singleton
 @Startup
@@ -30,7 +29,7 @@ public class SchedulerService extends AbstractService {
 	
 	private Scheduler scheduler;
 	
-	@EJB
+	@Inject
 	private RobotGroupService groupService;
 	
 	@PostConstruct

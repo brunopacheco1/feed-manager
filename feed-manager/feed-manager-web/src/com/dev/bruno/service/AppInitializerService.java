@@ -5,9 +5,9 @@ import java.util.logging.Level;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Inject;
 
 import com.dev.bruno.dao.AppTokenDAO;
 import com.dev.bruno.exception.EntityExistsException;
@@ -16,19 +16,18 @@ import com.dev.bruno.locator.ServiceLocator;
 import com.dev.bruno.model.AppToken;
 import com.dev.bruno.model.AppUser;
 import com.dev.bruno.model.AppUserGroup;
-import com.dev.bruno.service.AbstractService;
 
 @Singleton
 @Startup
 public class AppInitializerService extends AbstractService {
 
-	@EJB
+	@Inject
 	private AppUserService userService;
 	
-	@EJB
+	@Inject
 	private AppUserGroupService groupService;
 	
-	@EJB
+	@Inject
 	private AppTokenDAO tokenDAO;
 	
 	@Resource(name="app.context")

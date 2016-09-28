@@ -2,7 +2,7 @@ package com.dev.bruno.queue.consumer;
 
 import java.util.logging.Level;
 
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -16,10 +16,10 @@ import com.dev.bruno.service.DocumentURLService;
 
 public class DocumentURLQueueConsumer extends AbstractConsumer implements MessageListener {
 	
-	@EJB
+	@Inject
 	private DocumentURLService urlService;
 	
-	@EJB
+	@Inject
 	private DocumentURLQueueService urlQueueService;
 	
 	@Override

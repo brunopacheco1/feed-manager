@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -20,17 +20,16 @@ import javax.ws.rs.core.Response.Status;
 import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.model.DocumentURL;
 import com.dev.bruno.queue.service.DocumentURLQueueService;
-import com.dev.bruno.resource.AbstractResource;
 import com.dev.bruno.service.DocumentURLService;
 
 @Stateless
 @Path("document-url")
 public class DocumentURLResource extends AbstractResource {
 
-	@EJB
+	@Inject
 	private DocumentURLQueueService documentURLQueueService;
 	
-	@EJB
+	@Inject
 	private DocumentURLService documentURLService;
 	
 	@POST

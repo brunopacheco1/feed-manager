@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -24,7 +24,6 @@ import org.quartz.SchedulerException;
 import com.dev.bruno.exception.GenericException;
 import com.dev.bruno.model.AppToken;
 import com.dev.bruno.model.AppUser;
-import com.dev.bruno.resource.AbstractResource;
 import com.dev.bruno.service.AppTokenService;
 import com.dev.bruno.service.AppUserService;
 
@@ -32,10 +31,10 @@ import com.dev.bruno.service.AppUserService;
 @Path("user")
 public class AppUserResource extends AbstractResource {
 
-	@EJB
+	@Inject
 	private AppUserService userService;
 	
-	@EJB
+	@Inject
 	private AppTokenService tokenService;
 	
 	@POST

@@ -6,8 +6,8 @@ import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.ejb.Singleton;
+import javax.inject.Inject;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
@@ -37,13 +37,13 @@ public class DocumentURLQueueService extends AbstractService {
 	@Resource(name="documentURLQueue")
 	private String documentURLQueue;
 	
-	@EJB
+	@Inject
 	private DocumentURLQueueController queueController;
 	
-	@EJB
+	@Inject
 	private NormalizationService normalizationService;
 	
-	@EJB
+	@Inject
 	private RobotService robotService;
 	
 	private Connection connection;
